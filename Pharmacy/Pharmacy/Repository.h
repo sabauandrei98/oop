@@ -15,7 +15,10 @@ void destroyDynamicRepo(DynamicRepo* dr);
 void resizeDynamicRepo(DynamicRepo* dr);
 
 //Functionalities
-int addElement(DynamicRepo* dr, Medication med);
+void addElement(DynamicRepo* dr, Medication med);
+void updateElement(DynamicRepo* dr, int medPosition, Medication med);
+void removeElement(DynamicRepo* dr, int position);
 
+//Others
 int inRepo(DynamicRepo* dr, Medication med);
 void repositoryToString(DynamicRepo* dr);

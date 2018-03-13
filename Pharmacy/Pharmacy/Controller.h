@@ -11,3 +11,6 @@ typedef struct {
 Controller createController(DynamicRepo* repository);
 
 int controllerAddElement(Controller* controller, Medication medication);
+int controllerUpdateElement(Controller* controller, Medication medication);
+int controllerRemoveElement(Controller* controller, Medication medication);
+DynamicRepo* controllerSearchElement(Controller* controller, Medication medication);

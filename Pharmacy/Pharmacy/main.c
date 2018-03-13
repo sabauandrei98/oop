@@ -6,32 +6,17 @@
 
 void initialData(DynamicRepo* myRepo)
 {
-	addElement(myRepo, createMedication("med1", 10, 20, 30));
-	addElement(myRepo, createMedication("med2", 10, 20, 30));
-	addElement(myRepo, createMedication("med3", 10, 20, 30));
-	addElement(myRepo, createMedication("med4", 10, 20, 30));
-	addElement(myRepo, createMedication("med5", 10, 20, 30));
-	addElement(myRepo, createMedication("med6", 10, 20, 30));
-	addElement(myRepo, createMedication("med7", 10, 20, 30));
-	addElement(myRepo, createMedication("med8", 10, 20, 30));
-	addElement(myRepo, createMedication("med9", 10, 20, 30));
-	addElement(myRepo, createMedication("med10", 10, 20, 30));
-	addElement(myRepo, createMedication("med3", 10, 20, 30));
-	addElement(myRepo, createMedication("med4", 10, 20, 30));
-	addElement(myRepo, createMedication("med5", 10, 20, 30));
-	addElement(myRepo, createMedication("med6", 10, 20, 30));
-	addElement(myRepo, createMedication("med7", 10, 20, 30));
-	addElement(myRepo, createMedication("med8", 10, 20, 30));
-	addElement(myRepo, createMedication("med9", 10, 20, 30));
-	addElement(myRepo, createMedication("med10", 10, 20, 30));
-	addElement(myRepo, createMedication("med3", 10, 20, 30));
-	addElement(myRepo, createMedication("med4", 10, 20, 30));
-	addElement(myRepo, createMedication("med5", 10, 20, 30));
-	addElement(myRepo, createMedication("med6", 10, 20, 30));
-	addElement(myRepo, createMedication("med7", 10, 20, 30));
-	addElement(myRepo, createMedication("med8", 10, 20, 30));
-	addElement(myRepo, createMedication("med9", 10, 20, 30));
-	addElement(myRepo, createMedication("med10", 10, 20, 30));
+	addElement(myRepo, createMedication("Raceala1", 10,  0, 150));
+	addElement(myRepo, createMedication("Raceala2", 15, 20, 200));
+	addElement(myRepo, createMedication("Raceala3", 20, 30, 300));
+	addElement(myRepo, createMedication("Febra1", 10,  0, 50));
+	addElement(myRepo, createMedication("Febra2", 20,  0, 100));
+	addElement(myRepo, createMedication("Gripa", 15,  0, 250));
+	addElement(myRepo, createMedication("Stomac", 30,  0, 35));
+	addElement(myRepo, createMedication("Digestie1", 80,  0, 2000));
+	addElement(myRepo, createMedication("Digestie2", 90, 20, 2500));
+	addElement(myRepo, createMedication("Digestie3", 100, 3, 3000));
+	
 }
 
 int main()
