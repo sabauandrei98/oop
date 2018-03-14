@@ -1,0 +1,3 @@
+﻿  main.c
+c:\users\andrei\desktop\pharmacy\pharmacy\main.c(48): warning C4013: 'system' undefined; assuming extern returning int
+  Pharmacy.vcxproj -> C:\Users\Andrei\Desktop\Pharmacy\Pharmacy\x64\Debug\Pharmacy.exe
