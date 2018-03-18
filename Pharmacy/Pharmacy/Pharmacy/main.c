@@ -2,13 +2,13 @@
 #include "Controller.h"
 #include "Repository.h"
 #include "Medication.h"
-
+#include <crtdbg.h>
 
 void initialData(DynamicRepo* myRepo)
 {
-	addElement(myRepo, createMedication("Raceala1", 10,  0, 150));
-	addElement(myRepo, createMedication("Raceala2", 15, 20, 200));
-	addElement(myRepo, createMedication("Raceala3", 20, 30, 300));
+	addElement(myRepo, createMedication("Raceala", 10,  0, 150));
+	addElement(myRepo, createMedication("Raceala", 15, 20, 500));
+	addElement(myRepo, createMedication("Raceala", 20, 30, 300));
 	addElement(myRepo, createMedication("Febra1", 10,  0, 50));
 	addElement(myRepo, createMedication("Febra2", 20,  0, 100));
 	addElement(myRepo, createMedication("Gripa", 15,  0, 250));
@@ -43,8 +43,12 @@ int main()
 	repositoryToString(pharmaRepo);
 	//////////////////////
 
+	
+
 	startUI(&pharmaUI);
 	
 	system("pause");
+	_CrtDumpMemoryLeaks();
+
 	return 0;
 }

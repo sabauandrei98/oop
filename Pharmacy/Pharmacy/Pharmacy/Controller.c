@@ -91,6 +91,25 @@ DynamicRepo* controllerSearchElement(Controller* controller, Medication medicati
 	return dr;
 }
 
+DynamicRepo* controllerShortSupply(Controller* controller, int quantity)
+{
+	if (controller->repository == NULL)
+		return NULL; //memory problem
+
+	for (int i = 0; i < controller->repository->length; i++)
+		if (controller->repository->elements == NULL)
+			return NULL; //memory problem
+
+	DynamicRepo* dr = createDynamicRepo(1);
+
+	for (int i = 0; i < controller->repository->length; i++)
+		if (controller->repository->elements[i].quantity < quantity)
+			addElement(dr, controller->repository->elements[i]);
+
+	return dr;
+}
+
+
 void controllerTest()
 {
 	DynamicRepo* dr = createDynamicRepo(5);
@@ -128,5 +147,8 @@ void controllerTest()
 
 	//tested:
 	//controllerSearchElement
+
+	destroyDynamicRepo(dr);
+	destroyDynamicRepo(searchInRepo);
 
 }

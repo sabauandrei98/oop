@@ -57,11 +57,18 @@ void updateElement(DynamicRepo* dr, int medPosition, Medication med);
 void removeElement(DynamicRepo* dr, int position);
 
 /// <summary>
-/// Sorts the Repository ascending
+/// Sorts the Repository ascending by name
 /// </summary>
 /// <param name="dr">A pointer to the container</param>
 /// <returns>Returns a pointer to the sorted repository</returns>
 DynamicRepo* sortRepository(DynamicRepo* dr);
+
+/// <summary>
+/// Sorts the Repository ascending by price
+/// </summary>
+/// <param name="dr">A pointer to the container</param>
+/// <returns>Returns a pointer to the sorted repository</returns>
+DynamicRepo* sortRepositoryByPrice(DynamicRepo* dr);
 
 
 //Others

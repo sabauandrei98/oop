@@ -52,6 +52,8 @@ int controllerRemoveElement(Controller* controller, Medication medication);
 /// <returns>NULL for a memory problem, otherwise, a pointer to a DynamicRepo containing the elements </returns>
 DynamicRepo* controllerSearchElement(Controller* controller, Medication medication);
 
+DynamicRepo* controllerShortSupply(Controller* controller, int quantity);
+
 
 //Tests
 

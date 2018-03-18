@@ -106,6 +106,20 @@ DynamicRepo* sortRepository(DynamicRepo* dr)
 	return dr;
 }
 
+DynamicRepo* sortRepositoryByPrice(DynamicRepo* dr)
+{
+	for (int i = 0; i < dr->length; i++)
+		for (int j = i + 1; j < dr->length; j++)
+			if (dr->elements[i].price > dr->elements[j].price)
+			{
+				Medication med = dr->elements[i];
+				dr->elements[i] = dr->elements[j];
+				dr->elements[j] = med;
+			}
+
+	return dr;
+}
+
 void repositoryToString(DynamicRepo* dr)
 {
 	for (int i = 0; i < dr->length; i++)
@@ -175,6 +189,8 @@ void repositoryTest()
 
 	//tested:
 	//sortRepository
+
+	destroyDynamicRepo(dr);
 }
 
 

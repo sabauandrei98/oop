@@ -20,6 +20,8 @@ void printMenu()
 	printf("2. Update the quantity or the price of a product\n");
 	printf("3. Delete a product\n");
 	printf("4. Find a product\n");
+	printf("5. For a medication, all medications sorted descending by price\n");
+	printf("6. Short supply medications\n");
 	printf("7. Exit the program and free the memory.\n");
 	printf("\n");
 }
@@ -138,7 +140,45 @@ void uiSearchElement(UI* ui)
 	destroyDynamicRepo(dr);
 }
 
+void uiDescendingByPriceForMaterialName(UI* ui)
+{
+	printf("Enter the product name: ");
+	char name[20];
+	scanf("%s", name);
 
+	Medication medication = createMedication(name, 0, 0, 0);
+	DynamicRepo* dr = controllerSearchElement(ui->controller, medication);
+
+	if (dr->length == 0 || dr == NULL)
+	{
+		printf("Product not found or memory error !!!\n");
+	}
+	else
+	{
+		sortRepositoryByPrice(dr);
+		for (int i = dr->length - 1; i >= 0; i--)
+			medicationToString(dr->elements[i]);
+
+	}
+
+	destroyDynamicRepo(dr);
+}
+
+void uiShortSupply(UI* ui)
+{
+	int quantity = getCommand("Enter the quantity of the product: ");
+	DynamicRepo* dr = controllerShortSupply(ui->controller, quantity);
+
+	if (dr->length == 0 || dr == NULL)
+	{
+		printf("No product found or memory error !!!\n");
+	}
+	else
+		for (int i = 0; i < dr->length; i++)
+			medicationToString(dr->elements[i]);
+
+	destroyDynamicRepo(dr);
+}
 
 void executeCommand(int cmdIndex, UI* ui)
 {
@@ -150,6 +190,10 @@ void executeCommand(int cmdIndex, UI* ui)
 		uiRemoveElement(ui);
 	if (cmdIndex == 4)
 		uiSearchElement(ui);
+	if (cmdIndex == 5)
+		uiDescendingByPriceForMaterialName(ui);
+	if (cmdIndex == 6)
+		uiShortSupply(ui);
 }
 
 void startUI(UI* ui)
