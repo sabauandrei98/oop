@@ -1,62 +1,17 @@
+#include "Repository.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Repository.h"
 #include <assert.h>
 
 
-DynamicRepo* createDynamicRepo(int capacity)
-{
-	DynamicRepo* dr = (DynamicRepo*)malloc(sizeof(DynamicRepo));
 
-	if (dr == NULL)
-		return NULL;
-
-	dr->capacity = capacity;
-	dr->length = 0;
-
-	dr->elements = (Medication*)malloc(capacity * sizeof(Medication));
-
-	if (dr->elements == NULL)
-		return NULL;
-
-	return dr;
-}
-
-void destroyDynamicRepo(DynamicRepo* dr)
-{
-	if (dr == NULL)
-		return;
-
-	free(dr->elements);
-	dr->elements = NULL;
-
-	free(dr);
-	dr = NULL;
-}
-
-
-void resizeDynamicRepo(DynamicRepo* dr)
-{
-	if (dr == NULL)
-		return;
-
-	dr->capacity *= 2;
-
-	Medication* newDr = (Medication*)realloc(dr->elements, dr->capacity * sizeof(Medication));
-
-	if (newDr == NULL)
-		return;
-
-	dr->elements = newDr;
-}
-
-void addElement(DynamicRepo* dr, Medication med)
+void addElement(DynamicRepo* dr, Medication* med)
 {
 	if (dr->length == dr->capacity)
-		resizeDynamicRepo(dr);
+		resizeDynamicArray(dr);
 
-	dr->elements[dr->length] = med;
+	dr->elements[dr->length] = *med;
 	dr->length++;
 }
 
@@ -71,13 +26,13 @@ void removeElement(DynamicRepo* dr, int position)
 	}
 }
 
-void updateElement(DynamicRepo* dr, int medPosition, Medication med)
+void updateElement(DynamicRepo* dr, int medPosition, Medication* med)
 {
-	dr->elements[medPosition].quantity = med.quantity;
-	dr->elements[medPosition].price = med.price;
+	dr->elements[medPosition].quantity = med->quantity;
+	dr->elements[medPosition].price = med->price;
 }
 
-int inRepo(DynamicRepo* dr, Medication med)
+int inRepo(DynamicRepo* dr, Medication* med)
 {
 	if (dr == NULL)
 		return -2;
@@ -86,7 +41,7 @@ int inRepo(DynamicRepo* dr, Medication med)
 		return -2;
 
 	for (int i = 0; i < dr->length; i++)
-		if (strcmp(dr->elements[i].name, med.name) == 0 && dr->elements[i].concentration == med.concentration)
+		if (strcmp(dr->elements[i].name, med->name) == 0 && dr->elements[i].concentration == med->concentration)
 			return i;
 
 	return -1;
@@ -120,7 +75,7 @@ DynamicRepo* sortRepositoryByPrice(DynamicRepo* dr)
 	return dr;
 }
 
-void repositoryToString(DynamicRepo* dr)
+void printRepository(DynamicRepo* dr)
 {
 	for (int i = 0; i < dr->length; i++)
 		printf("Entry %d: %s, %d, %d, %d\n",
@@ -131,10 +86,12 @@ void repositoryToString(DynamicRepo* dr)
 			dr->elements[i].price);
 }
 
+
 void repositoryTest()
 {
-	DynamicRepo* dr = createDynamicRepo(2);
-	Medication med = createMedication("med1", 20, 20, 20);
+	DynamicRepo* dr = createDynamicArray(2);
+	Medication* med = createMedication("med1", 20, 20, 20);
+	
 	addElement(dr, med);
 
 	assert(dr->length == 1);
@@ -143,8 +100,11 @@ void repositoryTest()
 	//createDynamicRepo
 	//addElement
 
+	free(med);
 	med = createMedication("med2", 20, 20, 20);
+
 	addElement(dr, med);
+	free(med);
 	med = createMedication("med3", 20, 20, 20);
 	addElement(dr, med);
 
@@ -152,7 +112,7 @@ void repositoryTest()
 
 	//tested:
 	//resizeDynamicRepo
-
+	free(med);
 	med = createMedication("med3", 20, 50, 40);
 	updateElement(dr, 2, med);
 
@@ -171,8 +131,11 @@ void repositoryTest()
 	//tested:
 	//removeElement
 
+	free(med);
 	med = createMedication("med2", 20, 20, 20);
 	assert(inRepo(dr, med) == 0);
+
+	free(med);
 	med = createMedication("med1", 20, 20, 20);
 	assert(inRepo(dr, med) == -1);
 
@@ -180,6 +143,8 @@ void repositoryTest()
 	//inRepo
 
 	addElement(dr, med);
+
+	free(med);
 	med = createMedication("med3", 20, 20, 20);
 	sortRepository(dr);
 
@@ -189,8 +154,9 @@ void repositoryTest()
 
 	//tested:
 	//sortRepository
-
-	destroyDynamicRepo(dr);
+	free(med);
+	destroyDynamicArray(dr);
+	
 }
 
 

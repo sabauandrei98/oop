@@ -1,10 +1,12 @@
 #pragma once
 
 #include "Repository.h"
+#include "OperationStack.h"
 
 typedef struct {
 
 	DynamicRepo* repository;
+	OperationStack* operationStack;
 
 }Controller;
 
@@ -26,7 +28,7 @@ Controller createController(DynamicRepo* repository);
 /// <param name="controller">Pointer to the controller on which the operation will be executed</param>
 /// <param name="medication">The Medication structure which will be added to the Controller</param>
 /// <returns>-2 for a memory problem, 1 for success, 2 for update</returns>
-int controllerAddElement(Controller* controller, Medication medication);
+int controllerAddElement(Controller* controller, Medication* medication);
 
 /// <summary>
 /// Updates the value of an element in a specific Repo of this Controller
@@ -34,7 +36,7 @@ int controllerAddElement(Controller* controller, Medication medication);
 /// <param name="controller">Pointer to the controller on which the operation will be executed</param>
 /// <param name="medication">The Medication structure which will be updated in the Controller</param>
 /// <returns>-2 for a memory problem, 1 for success, -1 element not found</returns>
-int controllerUpdateElement(Controller* controller, Medication medication);
+int controllerUpdateElement(Controller* controller, Medication* medication);
 
 /// <summary>
 /// Removes an element from a specific Repo of this Controller.
@@ -42,7 +44,7 @@ int controllerUpdateElement(Controller* controller, Medication medication);
 /// <param name="controller">Pointer to the controller on which the operation will be executed</param>
 /// <param name="medication">The Medication structure which will be removed from the Controller</param>
 /// <returns>-2 for a memory problem, 1 for success, -1 element not found</returns>
-int controllerRemoveElement(Controller* controller, Medication medication);
+int controllerRemoveElement(Controller* controller, Medication* medication);
 
 /// <summary>
 /// Searches for all elements which contain a specific pattern in their name into a specific Repo of this Controller.
@@ -50,9 +52,12 @@ int controllerRemoveElement(Controller* controller, Medication medication);
 /// <param name="controller">Pointer to the controller on which the operation will be executed</param>
 /// <param name="medication">The Medication structure which the function is looking for</param>
 /// <returns>NULL for a memory problem, otherwise, a pointer to a DynamicRepo containing the elements </returns>
-DynamicRepo* controllerSearchElement(Controller* controller, Medication medication);
+DynamicRepo* controllerSearchElement(Controller* controller, Medication* medication);
 
 DynamicRepo* controllerShortSupply(Controller* controller, int quantity);
+
+int controllerUndo(Controller* controller);
+int controllerRedo(Controller* controller);
 
 
 //Tests

@@ -1,3 +1,4 @@
-﻿  main.c
-c:\users\andrei\desktop\pharmacy\pharmacy\main.c(50): warning C4013: 'system' undefined; assuming extern returning int
+﻿  Controller.c
+c:\users\andrei\desktop\pharmacy\pharmacy\controller.c(180): warning C4715: 'controllerRedo': not all control paths return a value
+c:\users\andrei\desktop\pharmacy\pharmacy\controller.c(154): warning C4715: 'controllerUndo': not all control paths return a value
   Pharmacy.vcxproj -> C:\Users\Andrei\Desktop\Pharmacy\Pharmacy\x64\Debug\Pharmacy.exe

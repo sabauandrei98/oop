@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include "UI.h"
 
-#define MAX_MENU_INDEX 7
-#define EXIT_MENU_INDEX 7
+#define MAX_MENU_INDEX 9
+#define EXIT_MENU_INDEX 9
 
 UI createUI(Controller* controller)
 {
@@ -22,7 +22,9 @@ void printMenu()
 	printf("4. Find a product\n");
 	printf("5. For a medication, all medications sorted descending by price\n");
 	printf("6. Short supply medications\n");
-	printf("7. Exit the program and free the memory.\n");
+	printf("7. Undo\n");
+	printf("8. Redo\n");
+	printf("9. Exit the program and free the memory.\n");
 	printf("\n");
 }
 
@@ -58,6 +60,10 @@ void printMessage(int operation)
 		printf("====Product not found !!!====\n");
 	else if (operation == -2)
 		printf("====Memory error !!!====\n");
+	else if (operation == -3)
+		printf("====Nothing to undo !!!====\n");
+	else if (operation == -4)
+		printf("====Nothing to redo !!!====\n");
 	else if (operation == 4)
 		printf("====Dealocating memory====\n");
 }
@@ -72,7 +78,7 @@ void uiAddElement(UI* ui)
 	int quantity = getCommand("Enter the quantity of the product: ");
 	int price = getCommand("Enter the price of the product: ");
 
-	Medication medication = createMedication(name, concentration, quantity, price);
+	Medication* medication = createMedication(name, concentration, quantity, price);
 	int operation = controllerAddElement(ui->controller, medication);
 	
 	printMessage(operation);
@@ -88,7 +94,7 @@ void uiUpdateElement(UI* ui)
 	int newQuantity = getCommand("Enter the newProductQuantity: ");
 	int newPrice = getCommand("Enter the newProductprice: ");
 
-	Medication medication = createMedication(oldName, oldConcentration, newQuantity, newPrice);
+	Medication* medication = createMedication(oldName, oldConcentration, newQuantity, newPrice);
 	int operation = controllerUpdateElement(ui->controller, medication);
 
 	printMessage(operation);
@@ -102,7 +108,7 @@ void uiRemoveElement(UI* ui)
 
 	int concentration = getCommand("Enter the concentration of the product: ");
 
-	Medication medication = createMedication(name, concentration, 0, 0);
+	Medication* medication = createMedication(name, concentration, 0, 0);
 	int operation = controllerRemoveElement(ui->controller, medication);
 
 	printMessage(operation);
@@ -122,7 +128,7 @@ void uiSearchElement(UI* ui)
 	}
 	else
 	{
-		Medication medication = createMedication(name, 0, 0, 0);
+		Medication* medication = createMedication(name, 0, 0, 0);
 		dr = controllerSearchElement(ui->controller, medication);
 	}
 
@@ -134,10 +140,10 @@ void uiSearchElement(UI* ui)
 	{
 		sortRepository(dr);
 		for (int i = 0; i < dr->length; i++)
-			medicationToString(dr->elements[i]);
+			printMedication(&dr->elements[i]);
 	}
 
-	destroyDynamicRepo(dr);
+	destroyDynamicArray(dr);
 }
 
 void uiDescendingByPriceForMaterialName(UI* ui)
@@ -146,7 +152,7 @@ void uiDescendingByPriceForMaterialName(UI* ui)
 	char name[20];
 	scanf("%s", name);
 
-	Medication medication = createMedication(name, 0, 0, 0);
+	Medication* medication = createMedication(name, 0, 0, 0);
 	DynamicRepo* dr = controllerSearchElement(ui->controller, medication);
 
 	if (dr->length == 0 || dr == NULL)
@@ -157,11 +163,11 @@ void uiDescendingByPriceForMaterialName(UI* ui)
 	{
 		sortRepositoryByPrice(dr);
 		for (int i = dr->length - 1; i >= 0; i--)
-			medicationToString(dr->elements[i]);
+			printMedication(&dr->elements[i]);
 
 	}
 
-	destroyDynamicRepo(dr);
+	destroyDynamicArray(dr);
 }
 
 void uiShortSupply(UI* ui)
@@ -175,9 +181,19 @@ void uiShortSupply(UI* ui)
 	}
 	else
 		for (int i = 0; i < dr->length; i++)
-			medicationToString(dr->elements[i]);
+			printMedication(&dr->elements[i]);
 
-	destroyDynamicRepo(dr);
+	destroyDynamicArray(dr);
+}
+
+void uiUndo(UI* ui)
+{
+	printMessage(controllerUndo(ui->controller));
+}
+
+void uiRedo(UI* ui)
+{
+	printMessage(controllerRedo(ui->controller));
 }
 
 void executeCommand(int cmdIndex, UI* ui)
@@ -194,6 +210,10 @@ void executeCommand(int cmdIndex, UI* ui)
 		uiDescendingByPriceForMaterialName(ui);
 	if (cmdIndex == 6)
 		uiShortSupply(ui);
+	if (cmdIndex == 7)
+		uiUndo(ui);
+	if (cmdIndex == 8)
+		uiRedo(ui);
 }
 
 void startUI(UI* ui)
@@ -210,7 +230,8 @@ void startUI(UI* ui)
 		{
 			if (EXIT_MENU_INDEX == cmdIndex)
 			{
-				destroyDynamicRepo(ui->controller->repository);
+				destroyDynamicArray(ui->controller->repository);
+				destroyOperationStack(ui->controller->operationStack);
 				printMessage(4);
 				return;
 			}
@@ -218,6 +239,6 @@ void startUI(UI* ui)
 			executeCommand(cmdIndex, ui);
 		}
 
-		repositoryToString(ui->controller->repository);
+		printRepository(ui->controller->repository);
 	}
 }

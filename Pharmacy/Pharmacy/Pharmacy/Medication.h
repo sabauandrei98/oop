@@ -18,16 +18,16 @@ typedef struct {
 /// <param name="quantity">The quantity of the Medication</param>
 /// <param name="price">The price of the Medication</param>
 /// <returns>A medication struct</returns>
-Medication createMedication(char name[], double concentration, double quantity, double price);
+Medication* createMedication(char name[], double concentration, double quantity, double price);
 
+void destroyMedication(Medication* med);
 
 //UI
-
 /// <summary>
 /// Prints a Medication
 /// </summary>
 /// <param name="Medication">The medication which will be printed</param>
-void medicationToString(Medication med);
+void printMedication(Medication* med);
 
 
 //Test

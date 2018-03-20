@@ -20,14 +20,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controller.c" />
+    <ClCompile Include="DynamicArray.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Medication.c" />
+    <ClCompile Include="OperationStack.c" />
     <ClCompile Include="Repository.c" />
     <ClCompile Include="UI.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Medication.h" />
+    <ClInclude Include="OperationStack.h" />
     <ClInclude Include="Repository.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
