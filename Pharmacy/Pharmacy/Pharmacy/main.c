@@ -7,8 +7,8 @@
 void initialData(Controller* myController)
 {
 
-	controllerAddElement(myController, createMedication("Raceala", 10,  0, 150));
-	controllerAddElement(myController, createMedication("Raceala", 15, 20, 500));
+	controllerAddElement(myController, createMedication("Raceala", 60,  0, 150));
+	controllerAddElement(myController, createMedication("Raceala", 65, 20, 500));
 	controllerAddElement(myController, createMedication("Raceala", 20, 30, 300));
 	controllerAddElement(myController, createMedication("Febra1", 10,  0, 50));
 	controllerAddElement(myController, createMedication("Febra2", 20,  0, 100));

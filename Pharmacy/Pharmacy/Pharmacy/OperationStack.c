@@ -7,10 +7,17 @@
 Operation* createOperation(Medication* med, char* operation)
 {
 	Operation* op = (Operation*)malloc(sizeof(Operation));
+	op->medication = (Medication*)malloc(sizeof(Medication));
 
-	op->medication = med;
+	strcpy(op->medication->name, med->name);
+	op->medication->concentration = med->concentration;
+	op->medication->price = med->price;
+	op->medication->quantity = med->quantity;
+
 	op->operation = (char*)malloc(sizeof(char) * (strlen(operation) + 1));
 	strcpy(op->operation, operation);
+
+	printf("%d create operation\n", &op->medication);
 
 	return op;
 }
@@ -35,8 +42,9 @@ void destroyOperationStack(OperationStack* os)
 {
 	for (int i = 0; i < os->length; i++)
 	{
-		free(os->operations[i]->operation);
+		printf("%d destroy \n", os->operations[i]->medication);
 		free(os->operations[i]->medication);
+		free(os->operations[i]->operation);
 		free(os->operations[i]);
 	}
 
@@ -48,7 +56,9 @@ void pushOperation(OperationStack* os, Operation* op)
 	if (isFull(os))
 		return;
 
+	
 	os->operations[os->length] = op;
+	printf("%d push from Controller\n", os->operations[os->length]);
 	os->length++;
 }
 

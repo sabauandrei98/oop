@@ -2,7 +2,7 @@
 
 typedef struct {
 
-	char name[20];
+	char name[25];
 	int concentration;
 	int quantity;
 	int price;
