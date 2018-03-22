@@ -1,0 +1,10 @@
+﻿  Controller.c
+  OperationStack.c
+c:\users\andrei\desktop\pharmacy\pharmacy\operationstack.c(69): warning C4033: 'popOperation' must return a value
+c:\users\andrei\desktop\pharmacy\pharmacy\operationstack.c(78): warning C4033: 'getTopOperation' must return a value
+  Generating Code...
+c:\users\andrei\desktop\pharmacy\pharmacy\operationstack.c(73): warning C4715: 'popOperation': not all control paths return a value
+c:\users\andrei\desktop\pharmacy\pharmacy\operationstack.c(81): warning C4715: 'getTopOperation': not all control paths return a value
+c:\users\andrei\desktop\pharmacy\pharmacy\controller.c(165): warning C4715: 'controllerUndo': not all control paths return a value
+c:\users\andrei\desktop\pharmacy\pharmacy\controller.c(191): warning C4715: 'controllerRedo': not all control paths return a value
+  Pharmacy.vcxproj -> C:\Users\Andrei\Desktop\Pharmacy\Pharmacy\x64\Debug\Pharmacy.exe
