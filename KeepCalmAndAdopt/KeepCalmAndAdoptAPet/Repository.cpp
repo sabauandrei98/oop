@@ -19,7 +19,7 @@ void Repository::updateRepository(int pos, const Dog& d)
 
 int Repository::getElementPosition(const Dog& d)
 {
-	TElement* elems = this->dynamicArray.getAllElems();
+	Dog* elems = this->dynamicArray.getAllElems();
 	for (int i = 0; i < this->dynamicArray.getSize(); i++)
 	{
 		if (elems[i].getAge() == d.getAge() && elems[i].getBreed() == d.getBreed() &&
@@ -28,9 +28,4 @@ int Repository::getElementPosition(const Dog& d)
 	}
 
 	return -1;
-}
-
-void repositoryTest()
-{
-
 }
