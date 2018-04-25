@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Compare.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="DynamicArray.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Compare.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="DynamicArray.h" />

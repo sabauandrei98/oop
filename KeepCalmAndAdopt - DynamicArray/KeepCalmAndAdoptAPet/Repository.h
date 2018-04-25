@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "DynamicArray.h"
+#include "Compare.h"
 using namespace std;
 
 
@@ -44,6 +45,18 @@ public:
 	/// </summary>
 	/// <returns>A Dynamic Array</returns>
 	DynamicArray<Dog> getDynamicArray() { return dynamicArray; };	
+
+	DynamicArray<Dog> sortArray(const Compare<Dog>& comp)
+	{
+		DynamicArray<Dog> myArray = this->getDynamicArray();
+		Dog* elems = myArray.getAllElems();
+		for (int i = 0; i < myArray.getSize(); i++)
+			for (int j = i + 1; j < myArray.getSize(); j++)
+				if (comp.compare(elems[i], elems[j]))
+					swap(elems[i], elems[j]);
+		return myArray;
+	}
+
 };
 
 

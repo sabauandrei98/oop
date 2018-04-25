@@ -144,9 +144,47 @@ void Tests::dogTest()
 	assert(dog.getAge() == 10);
 }
 
+void Tests::sortingTest() {
+	Repository repo;
+	
+	Dog dog1("Breed1", "Name1", 55, "www.google.ro");
+	repo.addRepository(dog1);
+
+	Dog dog2("Breed2", "Name9", 60, "www.google.ro");
+	repo.addRepository(dog2);
+
+	Dog dog3("Breed3", "Name3", 30, "www.google.ro");
+	repo.addRepository(dog3);
+
+	Dog dog4("Breed4", "Name4", 40, "www.google.ro");
+	repo.addRepository(dog4);
+
+	Dog dog5("Breed4", "Name6", 40, "www.google.ro");
+	repo.addRepository(dog5);
+
+	SortByAgeDescending<Dog> sortByAge;
+	DynamicArray<Dog> myArray = repo.sortArray(sortByAge);
+	Dog* elems = myArray.getAllElems();
+	assert(elems[4].getAge() == 30);
+	assert(elems[3].getAge() == 40);
+	assert(elems[2].getAge() == 40);
+	assert(elems[1].getAge() == 55);
+	assert(elems[0].getAge() == 60);
+
+	SortByNameAscending<Dog> sortByName;
+	myArray = repo.sortArray(sortByName);
+	elems = myArray.getAllElems();
+	assert(elems[0].getName() == "Name1");
+	assert(elems[1].getName() == "Name3");
+	assert(elems[2].getName() == "Name4");
+	assert(elems[3].getName() == "Name6");
+	assert(elems[4].getName() == "Name9");
+}
+
 void Tests::runTests() {
 	this->controllerTest();
 	this->repositoryTest();
 	this->dynamicArrayTest();
 	this->dogTest();
+	this->sortingTest();
 }

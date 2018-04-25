@@ -13,5 +13,6 @@ private:
 	void repositoryTest();
 	void dynamicArrayTest();
 	void dogTest();
+	void sortingTest();
 };
 
