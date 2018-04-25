@@ -1,0 +1,12 @@
+Bacteria: name, population number, isImmune
+
+Create a console based application to do the following things:
+
+1. Add into the database a new bacteria or update the population if it already exists
+2. List all the bacteria sorted ascending by name
+3. Environment change: if "sugar" the population of each bacteria *2
+		       if "antibiotic" the population of not immune bacteria become /2
+
+Tests and specifications for 1 and 3
+
+Time: 70 mins
