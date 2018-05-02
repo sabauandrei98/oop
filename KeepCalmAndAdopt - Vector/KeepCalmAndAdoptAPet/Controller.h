@@ -1,15 +1,18 @@
 #pragma once
 
 #include "Repository.h"
+#include "FileAdoptionList.h"
 
 class Controller
 {
 private:
 	Repository repository;
 	Repository adoptionRepo;
+	FileAdoptionList* fileAdoption;
 
 public:
 	Controller(const Repository& r) : repository(r) {}
+	Controller(const Repository& r, FileAdoptionList* adoption) : repository(r), fileAdoption(adoption) {}
 
 	/// <summary>
 	/// Adds an element into controller
@@ -52,6 +55,8 @@ public:
 	/// Gets the adoption repository
 	/// </summary>
 	Repository getAdoptionRepository() const { return adoptionRepo; };
+
+	void seeTheAdoptionListController();
 
 };
 

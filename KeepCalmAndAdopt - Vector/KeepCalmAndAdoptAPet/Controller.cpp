@@ -14,7 +14,8 @@ void Controller::addController(const Dog& d)
 
 void Controller::addAdoptionController(const Dog& d)
 {
-	this->adoptionRepo.addRepository(d);
+	this->fileAdoption->addDynamicArray(d);
+	this->fileAdoption->writeToFile();
 }
 
 void Controller::deleteController(const Dog& d)
@@ -52,6 +53,11 @@ DynamicArray<Dog> Controller::getSpecificDogs(const Dog& dog)
 			result.addDynamicArray(dogsList[i]);
 
 	return result;
+}
+
+void Controller::seeTheAdoptionListController()
+{
+	this->fileAdoption->displayAdoptionList();
 }
 
 

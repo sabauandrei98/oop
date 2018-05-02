@@ -156,6 +156,7 @@ void UI::iterateListOfDogsUI(const DynamicArray<Dog>& list)
 			}
 		}
 	}
+
 }
 
 void UI::seeTheDogsUI()
@@ -178,7 +179,7 @@ void UI::seeTheDogsOfBreedUI()
 
 void UI::seeTheAdoptionListUI()
 {
-	this->ctrl.getAdoptionRepository().getDynamicArray().printArray();
+	this->ctrl.seeTheAdoptionListController();
 }
 
 //ADMINISTRATOR MODE

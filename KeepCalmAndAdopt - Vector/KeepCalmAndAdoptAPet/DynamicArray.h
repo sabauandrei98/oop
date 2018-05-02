@@ -6,7 +6,7 @@
 template <typename TElement>
 class DynamicArray
 {
-private:
+protected:
 	vector<TElement> elems;
 
 public:
@@ -16,6 +16,7 @@ public:
 	/// </summary>
 	/// <param name="capacity">Predefinited size</param>
 	DynamicArray(){};
+	virtual ~DynamicArray() {};
 
 	DynamicArray<TElement>& operator=(const DynamicArray<TElement>& v);
 	DynamicArray<TElement>& operator+(DynamicArray<TElement>& v);

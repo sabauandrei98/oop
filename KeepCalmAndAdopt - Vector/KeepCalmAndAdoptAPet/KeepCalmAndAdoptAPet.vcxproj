@@ -166,9 +166,12 @@
   <ItemGroup>
     <ClInclude Include="Compare.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="CSVAdoptionList.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="FileAdoptionList.h" />
+    <ClInclude Include="HtmlAdoptionList.h" />
     <ClInclude Include="Repository.h" />
     <ClInclude Include="Tests.h" />
     <ClInclude Include="UI.h" />
