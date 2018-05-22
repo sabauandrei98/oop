@@ -22,11 +22,6 @@ Dog::Dog(const string& breed, const string& name, const int age, const string& p
 	this->photograph = photohraph;
 }
 
-void Dog::printDog()
-{
-	cout << this->breed << " " << this->name << " " << this->age << " " << this->photograph << '\n';
-}
-
 vector<string> tokenize(string str, char delimiter)
 {
 	vector <string> result;
@@ -49,13 +44,9 @@ istream& operator>>(std::istream & is, Dog & dog)
 		return is;
 
 	Validator validate;
-	try {
-		validate.validateDog(tokens[0], tokens[1], tokens[2], tokens[3]);
-	}
-	catch (Exceptions ex)
-	{
-		ex.printException();
-	}
+	
+	validate.validateDog(tokens[0], tokens[1], tokens[2], tokens[3]);
+	
 
 	dog.breed = tokens[0];
 	dog.name = tokens[1];

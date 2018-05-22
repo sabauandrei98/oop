@@ -1,45 +1,31 @@
 #include "Controller.h"
+#include "ExceptionsQt.h"
 
-void Controller::addController(const Dog& d)
+int Controller::addController(const Dog& d)
 {
 	int pos = this->repository.getElementPosition(d);
 	if (pos == -1)
 	{
 		this->repository.addRepository(d);
-		throw Exceptions(typeid(this).name(), "Element added");
+		return 0;
 	}
-	else
-		throw Exceptions(typeid(this).name(), "Already in the repository");
+	return 1;
 }
 
-void Controller::addAdoptionController(const Dog& d)
+void Controller::addAdoptionController(Dog d)
 {
 	this->fileAdoption->addDynamicArray(d);
 	this->fileAdoption->writeToFile();
 }
 
-void Controller::deleteController(const Dog& d)
+void Controller::deleteController(int pos)
 {
-	int pos = this->repository.getElementPosition(d);
-	if (pos != -1)
-	{
-		this->repository.deleteRepository(pos);
-		throw Exceptions(typeid(this).name(), "Element deleted");
-	}
-	else
-		throw Exceptions(typeid(this).name(), "No such element");
+	this->repository.deleteRepository(pos);
 }
 
-void Controller::updateController(const Dog& oldDog, const Dog& newDog)
+void Controller::updateController(int pos, const Dog& newDog)
 {
-	int pos = this->repository.getElementPosition(oldDog);
-	if (pos != -1)
-	{
-		this->repository.updateRepository(pos, newDog);
-		throw Exceptions(typeid(this).name(), "Element updated");
-	}
-	else
-		throw Exceptions(typeid(this).name(), "No such element");
+	this->repository.updateRepository(pos, newDog);
 }
 
 DynamicArray<Dog> Controller::getSpecificDogs(const Dog& dog)

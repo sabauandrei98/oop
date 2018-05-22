@@ -69,8 +69,8 @@
     <QtMoc>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
-      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</IncludePath>
-      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</Define>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
     </QtMoc>
     <QtUic>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
@@ -100,8 +100,8 @@
     <QtMoc>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
-      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</IncludePath>
-      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</Define>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
     </QtMoc>
     <QtUic>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
@@ -115,16 +115,12 @@
   <ItemGroup>
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Dog.cpp" />
+    <ClCompile Include="ExceptionsQt.cpp" />
     <ClCompile Include="FileAdoptionList.cpp" />
-    <ClCompile Include="KeepCalmAndAdoptAPetQt.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Repository.cpp" />
-    <ClCompile Include="Tests.cpp" />
-    <ClCompile Include="UI.cpp" />
-    <ClCompile Include="Validator.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="KeepCalmAndAdoptAPetQt.h" />
+    <ClCompile Include="UserWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="KeepCalmAndAdoptAPetQt.ui" />
@@ -133,17 +129,16 @@
     <QtRcc Include="KeepCalmAndAdoptAPetQt.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Compare.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="CSVAdoptionList.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="DynamicArray.h" />
-    <ClInclude Include="Exceptions.h" />
+    <QtMoc Include="ExceptionsQt.h" />
     <ClInclude Include="FileAdoptionList.h" />
     <ClInclude Include="HtmlAdoptionList.h" />
+    <QtMoc Include="MainWindow.h" />
     <ClInclude Include="Repository.h" />
-    <ClInclude Include="Tests.h" />
-    <ClInclude Include="UI.h" />
+    <QtMoc Include="UserWindow.h" />
     <ClInclude Include="Validator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

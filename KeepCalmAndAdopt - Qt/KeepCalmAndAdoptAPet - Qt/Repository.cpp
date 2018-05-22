@@ -5,16 +5,19 @@ using namespace std;
 void Repository::addRepository(const Dog& d)
 {
 	this->dynamicArray.addDynamicArray(d);
+	this->saveDataToFile();
 }
 
 void Repository::deleteRepository(int pos)
 {
 	this->dynamicArray.deleteDynamicArray(pos);
+	this->saveDataToFile();
 }
 
 void Repository::updateRepository(int pos, const Dog& d)
 {
 	this->dynamicArray.updateDynamicArray(pos, d);
+	this->saveDataToFile();
 }
 
 int Repository::getElementPosition(const Dog& d)
@@ -27,22 +30,6 @@ int Repository::getElementPosition(const Dog& d)
 			return i;
 	}
 	return -1;
-}
-
-DynamicArray<Dog> Repository::sortArray(const Compare<Dog>& comp)
-{
-	DynamicArray<Dog> myArray = this->getDynamicArray();
-	vector<Dog> elems = myArray.getAllElems();
-	for (int i = 0; i < myArray.getSize(); i++)
-		for (int j = i + 1; j < myArray.getSize(); j++)
-			if (comp.compare(elems[i], elems[j]))
-				swap(elems[i], elems[j]);
-
-	DynamicArray<Dog> result;
-	for (int i = 0; i < myArray.getSize(); i++)
-		result.addDynamicArray(elems[i]);
-
-	return result;
 }
 
 void Repository::saveDataToFile()
