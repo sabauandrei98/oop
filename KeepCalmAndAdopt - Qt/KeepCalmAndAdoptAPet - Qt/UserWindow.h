@@ -6,6 +6,9 @@
 #include <qlistwidget.h>
 #include "Controller.h"
 #include <qlabel.h>
+#include <QtWidgets/QApplication>
+#include "PetsTableModel.h"
+#include <QSortFilterProxyModel>
 
 namespace Ui {
 	class UserWindow;
@@ -16,7 +19,7 @@ class UserWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	UserWindow(const Controller& cont, QWidget *parent = 0);
+	UserWindow(Controller& cont, QWidget *parent = 0);
 
 
 private slots:
@@ -24,17 +27,21 @@ private slots:
 	void adoptDogEvent();
 	void nextDogEvent();
 	void openListEvent();
+	void filterEvent();
 
 
 private:
-	Controller controller;
+	Controller& controller;
 
 	QPushButton *seeTheListButton;
 	QPushButton *updateButton;
-	QPushButton *deleteButton;
+	QPushButton *filterButton;
 	QPushButton *nextButton;
 	QPushButton *adoptButton;
 	QPushButton *openListButton;
+
+	QLineEdit *textBoxBreed;
+	QLineEdit *textBoxAge;
 
 	QLabel *currentDog;
 	QListWidget *adoptionList;

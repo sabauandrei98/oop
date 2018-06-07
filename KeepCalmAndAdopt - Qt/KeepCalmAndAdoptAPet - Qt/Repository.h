@@ -24,8 +24,8 @@ public:
 	void deleteRepository(int pos);
 	void updateRepository(int pos, const Dog& d);
 	int getElementPosition(const Dog& d);
-
-	DynamicArray<Dog> getDynamicArray() { return dynamicArray; };	
+	int getSize() { return this->dynamicArray.getSize(); }
+	DynamicArray<Dog>& getDynamicArray() { return dynamicArray; };	
 
 	void saveDataToFile();
 	void getDataFromFile();

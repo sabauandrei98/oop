@@ -16,5 +16,5 @@ public:
 	void deleteDynamicArray(int pos) { this->elems.erase(this->elems.begin() + pos); }
 	void updateDynamicArray(int pos, const TElement& e) { this->elems[pos] = e; }
 	int getSize() { return this->elems.size(); }
-	vector<TElement> getAllElems() const { return this->elems; }
+	vector<TElement>& getAllElems() { return this->elems; }
 };

@@ -14,8 +14,9 @@
 #include <qmessagebox.h>
 #include <QCoreApplication>
 #include "ExceptionsQt.h"
+#include <qcombobox.h>
 
-MainWindow::MainWindow(Controller cont, QWidget *parent): controller(cont), QMainWindow(parent)
+MainWindow::MainWindow(Controller& cont, QWidget *parent): controller(cont), QMainWindow(parent)
 {
 	QLabel *labelBreed = new QLabel{ this };
 	labelBreed->setText("Breed: ");
@@ -44,15 +45,26 @@ MainWindow::MainWindow(Controller cont, QWidget *parent): controller(cont), QMai
 	addButton = new QPushButton{ "Add",this };
 	updateButton = new QPushButton{ "Update",this };
 	deleteButton = new QPushButton{ "Delete",this };
+	undoButton = new QPushButton{ "Undo",this };
+	redoButton = new QPushButton{ "Redo",this };
 
 	addButton->setGeometry(QRect(QPoint(50, 300), QSize(200, 50)));
 	updateButton->setGeometry(QRect(QPoint(50, 350), QSize(200, 50)));
 	deleteButton->setGeometry(QRect(QPoint(50, 400), QSize(200, 50)));
+	undoButton->setGeometry(QRect(QPoint(50, 500), QSize(200, 50)));
+	redoButton->setGeometry(QRect(QPoint(50, 550), QSize(200, 50)));
+
+	comboBox = new QComboBox{ this };
+	comboBox->setGeometry(QRect(QPoint(300, 20), QSize(250, 25)));
+	comboBox->addItem("Detailed");
+	comboBox->addItem("Short");
 
 	connect(addButton, SIGNAL(released()), this, SLOT(addEvent()));
 	connect(updateButton, SIGNAL(released()), this, SLOT(updateEvent()));
 	connect(deleteButton, SIGNAL(released()), this, SLOT(deleteEvent()));
-
+	connect(undoButton, SIGNAL(released()), this, SLOT(undoEvent()));
+	connect(redoButton, SIGNAL(released()), this, SLOT(redoEvent()));
+	connect(comboBox, SIGNAL(currentTextChanged(QString)), this, SLOT(comboChanged(QString)));
 
 	dataBase = new QListWidget{ this };
 	dataBase->setGeometry(QRect(QPoint(300, 50), QSize(300, 800)));
@@ -60,7 +72,31 @@ MainWindow::MainWindow(Controller cont, QWidget *parent): controller(cont), QMai
 	refreshDataBaseContainer();
 }
 
-void MainWindow::refreshDataBaseContainer()
+void MainWindow::undoEvent()
+{
+	ExceptionsQt ex{ "Exec undo !" };
+	this->controller.undo();
+	this->refreshDataBaseContainer();
+}
+
+void MainWindow::redoEvent()
+{
+	ExceptionsQt ex{ "Exec redo !" };
+	this->controller.redo();
+	this->refreshDataBaseContainer();
+}
+
+
+void MainWindow::comboChanged(const QString &text)
+{
+	if (text == "Detailed")
+		refreshDataBaseContainer(0);
+	if (text == "Short")
+		refreshDataBaseContainer(1);
+}
+
+
+void MainWindow::refreshDataBaseContainer(int option)
 {
 	dataBase->clear();
 
@@ -68,11 +104,17 @@ void MainWindow::refreshDataBaseContainer()
 
 	for (int i = 0; i < myList.size(); i++)
 	{
-		string item = myList[i].getBreed() + ",   " + myList[i].getName() + ",   " + to_string(myList[i].getAge()) + ",   " + myList[i].getPhotograph();
+		string item = "";
+		if (option == 0)
+			item = myList[i].getBreed() + ",   " + myList[i].getName() + ",   " + to_string(myList[i].getAge()) + ",   " + myList[i].getPhotograph();
+		else
+			item = myList[i].getBreed();
+
 		char* toChr = new char[item.length()];
 		strcpy(toChr, item.c_str());
 		new QListWidgetItem(toChr, dataBase);
 	}
+
 }
 
 bool MainWindow::noEmptyFields()
@@ -85,10 +127,9 @@ bool MainWindow::noEmptyFields()
 		return false;
 	if (textBoxPhotograph->text() == "")
 		return false;
-	
+
 	return true;
 }
-
 
 void MainWindow::addEvent()
 {

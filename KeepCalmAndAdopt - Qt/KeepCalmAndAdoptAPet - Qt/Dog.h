@@ -21,6 +21,11 @@ public:
 	int getAge() const { return age; }
 	string getPhotograph() const { return photograph; }
 
+	void setBreed(string newBreed) { this->breed = newBreed; };
+	void setName(string newName) { this->name = newName; };
+	void setAge(int newAge) { this->age = newAge; };
+	void setPhotograph(string newPhotograph) { this->photograph = newPhotograph; };
+
 	friend istream& operator>>(std::istream& is, Dog& d);
 	friend ostream& operator<<(std::ostream& os, const Dog& d);
 

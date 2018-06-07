@@ -119,6 +119,8 @@
     <ClCompile Include="FileAdoptionList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="PetsTableModel.cpp" />
+    <ClCompile Include="PetsTableWidget.cpp" />
     <ClCompile Include="Repository.cpp" />
     <ClCompile Include="UserWindow.cpp" />
   </ItemGroup>
@@ -137,9 +139,17 @@
     <ClInclude Include="FileAdoptionList.h" />
     <ClInclude Include="HtmlAdoptionList.h" />
     <QtMoc Include="MainWindow.h" />
+    <ClInclude Include="PetsTableModel.h" />
+    <QtMoc Include="PetsTableWidget.h" />
+    <ClInclude Include="Redo.h" />
     <ClInclude Include="Repository.h" />
     <QtMoc Include="UserWindow.h" />
+    <ClInclude Include="Undo.h" />
     <ClInclude Include="Validator.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data.txt" />
+    <Text Include="file.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

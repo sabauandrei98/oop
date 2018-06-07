@@ -19,6 +19,7 @@
 #include <qdebug.h>
 #include <qmessagebox.h>
 #include "ExceptionsQt.h"
+#include "PetsTableWidget.h"
 
 using namespace std;
 
@@ -81,6 +82,29 @@ int USER_MODE(int argc, char *argv[])
 	return app.exec();
 }
 
+int TABLE_MODE(int argc, char *argv[])
+{
+	QApplication app(argc, argv);
+
+	Repository repository{ "file" };
+
+	PetsTableModel* tableModel = new PetsTableModel{ repository };
+
+	QSortFilterProxyModel* sortModel = new QSortFilterProxyModel{};
+	sortModel->setSourceModel(tableModel);
+	PetsTableWidget mainAdministratorWidget{ repository, sortModel, true };
+	mainAdministratorWidget.setWindowTitle("MainAdministrator");
+	mainAdministratorWidget.show();
+
+	QSortFilterProxyModel* filterModel = new QSortFilterProxyModel{};
+	filterModel->setSourceModel(tableModel);
+	PetsTableWidget helperWidget{ repository, filterModel, false };
+	helperWidget.setWindowTitle(QString{ "Helper" });
+	helperWidget.show();
+
+	return app.exec();
+}
+
 int main(int argc, char *argv[])
 {
 	if (APPLICATION_MODE == "USER")
@@ -90,5 +114,9 @@ int main(int argc, char *argv[])
 	if (APPLICATION_MODE == "ADMIN")
 	{
 		ADMIN_MODE(argc, argv);
+	}
+	if (APPLICATION_MODE == "TABLE")
+	{
+		TABLE_MODE(argc, argv);
 	}
 }

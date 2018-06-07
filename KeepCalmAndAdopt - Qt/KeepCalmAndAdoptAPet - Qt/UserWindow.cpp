@@ -14,8 +14,9 @@
 #include <qmessagebox.h>
 #include <QCoreApplication>
 #include "ExceptionsQt.h"
+#include "PetsTableWidget.h"
 
-UserWindow::UserWindow(const Controller& cont, QWidget *parent) : controller(cont), QMainWindow(parent)
+UserWindow::UserWindow(Controller& cont, QWidget *parent) : controller(cont), QMainWindow(parent)
 {
 	
 	currentDog = new QLabel{ this };
@@ -28,19 +29,29 @@ UserWindow::UserWindow(const Controller& cont, QWidget *parent) : controller(con
 	nextButton = new QPushButton{ "Next",this };
 	seeTheListButton = new QPushButton{ "Adopt a dog",this };
 	openListButton = new QPushButton{ "See the list",this };
-	deleteButton = new QPushButton{ "Delete",this };
+	filterButton = new QPushButton{ "Filter",this };
 
 	adoptButton->setGeometry(QRect(QPoint(250, 150), QSize(200, 50)));
 	nextButton->setGeometry(QRect(QPoint(50, 150), QSize(200, 50)));
 	seeTheListButton->setGeometry(QRect(QPoint(50, 300), QSize(200, 50)));
 	openListButton->setGeometry(QRect(QPoint(50, 350), QSize(200, 50)));
-	deleteButton->setGeometry(QRect(QPoint(50, 400), QSize(200, 50)));
+	filterButton->setGeometry(QRect(QPoint(50, 550), QSize(200, 50)));
+
+	QLabel *labelBreed = new QLabel{ this };
+	labelBreed->setText("Breed: ");
+	labelBreed->setGeometry(QRect(QPoint(50, 450), QSize(150, 50)));
+	textBoxBreed = new QLineEdit{ labelBreed };
+
+	QLabel *labelAge = new QLabel{ this };
+	labelAge->setText("Age: ");
+	labelAge->setGeometry(QRect(QPoint(50, 500), QSize(150, 50)));
+	textBoxAge = new QLineEdit{ labelAge };
 
 	connect(seeTheListButton, SIGNAL(released()), this, SLOT(seeTheListEvent()));
 	connect(nextButton, SIGNAL(released()), this, SLOT(nextDogEvent()));
 	connect(adoptButton, SIGNAL(released()), this, SLOT(adoptDogEvent()));
 	connect(openListButton, SIGNAL(released()), this, SLOT(openListEvent()));
-	
+	connect(filterButton, SIGNAL(released()), this, SLOT(filterEvent()));
 
 	adoptionList = new QListWidget{ this };
 	adoptionList->setGeometry(QRect(QPoint(600, 50), QSize(300, 800)));
@@ -88,6 +99,20 @@ void UserWindow::adoptDogEvent()
 void UserWindow::openListEvent()
 {
 	this->controller.seeTheAdoptionListController();
+}
+void UserWindow::filterEvent()
+{
+	if (textBoxAge->text() == "" || textBoxBreed->text() == "")
+	{
+		ExceptionsQt ex{ "Empty fields !" };
+	}
+	else
+	{
+		Dog dog{ textBoxBreed->text().toStdString(), "", stoi(textBoxAge->text().toStdString()), "" };
+		this->currentList = controller.getSpecificDogs(dog).getAllElems();
+		this->index = 0;
+		currentDog->setText(QString::fromStdString(this->currentList[this->index].toString()));
+	}
 }
 
 void UserWindow::nextDogEvent()
