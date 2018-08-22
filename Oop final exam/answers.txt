@@ -1,0 +1,7 @@
+1|what is my name?|marcel|andrei|30
+2|what is my name?|ana|andrei|35
+3|what is my name?|maria|andrei|39
+4|what is my name?|marcel|andrei|2
+5|what is my name?|ana|andrei|31
+6|another c++ code ?|maria|ana|12
+7|another c++ code ?|marcel|ana|3

@@ -1,0 +1,5 @@
+1|what is my name?|andrei
+2|what is the website name?|maria
+3|is this a c++ code ?|ana
+3|another c++ code ?|ana
+4|new question|mihai
